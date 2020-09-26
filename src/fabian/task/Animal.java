@@ -5,11 +5,14 @@ public class Animal {
     private Vector2d vector = new Vector2d(2,2);
 
     void move(MoveDirection direction){
-        switch (direction){
-            case LEFT: this.mapDirection.previous();
-            case RIGHT: this.mapDirection.next();
-            case FORWARD: moveForward(this);
-            case BACKWARD: moveBackward(this);
+        if(direction==MoveDirection.LEFT) {
+            this.mapDirection = this.mapDirection.previous();
+        }else if(direction==MoveDirection.RIGHT) {
+            this.mapDirection = this.mapDirection.next();
+        }else if(direction==MoveDirection.FORWARD) {
+            moveForward(this);
+        }else if(direction==MoveDirection.BACKWARD) {
+            moveBackward(this);
         }
     }
 
@@ -37,55 +40,57 @@ public class Animal {
     private void moveBackward(Animal animal) {
         if(animal.vector.x==4 && animal.vector.y==4){
             if(!(animal.mapDirection==MapDirection.SOUTH || animal.mapDirection==MapDirection.WEST))
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.x==0 && animal.vector.y==0){
             if(!(animal.mapDirection==MapDirection.NORTH || animal.mapDirection==MapDirection.EAST))
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.x==4 && animal.vector.y==0) {
             if (!(animal.mapDirection == MapDirection.NORTH || animal.mapDirection == MapDirection.WEST))
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.x==0 && animal.vector.y==4) {
             if (!(animal.mapDirection == MapDirection.SOUTH || animal.mapDirection == MapDirection.EAST))
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.x==4) {
             if (animal.mapDirection != MapDirection.WEST)
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.x==0) {
             if (animal.mapDirection != MapDirection.EAST)
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.y==4) {
             if (animal.mapDirection != MapDirection.SOUTH)
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
         }else if(animal.vector.y==0) {
             if (animal.mapDirection != MapDirection.NORTH)
-                animal.vector.add(animal.mapDirection.toUnitVector().opposite());
-        }
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
+        }else
+            animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
     }
     void moveForward(Animal animal){
         if(animal.vector.x==4 && animal.vector.y==4){
             if(!(animal.mapDirection==MapDirection.NORTH || animal.mapDirection==MapDirection.EAST))
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.x==0 && animal.vector.y==0){
             if(!(animal.mapDirection==MapDirection.SOUTH || animal.mapDirection==MapDirection.WEST))
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.x==4 && animal.vector.y==0) {
             if (!(animal.mapDirection == MapDirection.SOUTH || animal.mapDirection == MapDirection.EAST))
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.x==0 && animal.vector.y==4) {
             if (!(animal.mapDirection == MapDirection.NORTH || animal.mapDirection == MapDirection.WEST))
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.x==4) {
             if (animal.mapDirection != MapDirection.EAST)
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.x==0) {
             if (animal.mapDirection != MapDirection.WEST)
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.y==4) {
             if (animal.mapDirection != MapDirection.NORTH)
-                animal.vector.add(animal.mapDirection.toUnitVector());
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
         }else if(animal.vector.y==0) {
             if (animal.mapDirection != MapDirection.SOUTH)
-                animal.vector.add(animal.mapDirection.toUnitVector());
-        }
+                animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
+        }else
+            animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
     }
 }
