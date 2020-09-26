@@ -65,7 +65,7 @@ public class Animal {
         }else
             animal.vector = animal.vector.add(animal.mapDirection.toUnitVector().opposite());
     }
-    void moveForward(Animal animal){
+    private void moveForward(Animal animal){
         if(animal.vector.x==4 && animal.vector.y==4){
             if(!(animal.mapDirection==MapDirection.NORTH || animal.mapDirection==MapDirection.EAST))
                 animal.vector = animal.vector.add(animal.mapDirection.toUnitVector());
